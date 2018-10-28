@@ -154,3 +154,31 @@ struct nodo * insere_nodo(struct nodo * raiz, int valor){
 	}
 	
 }
+
+/* Consulta se nodo existe
+ * @param raiz raiz da árvore 
+ * @param valor chave a ser buscada
+ * @return ponteiro para nodo, ou NULL se inexistente
+ */
+struct nodo * busca(struct nodo * raiz, int valor){
+	
+	if(raiz==NULL){
+		return NULL;
+	}else{
+		if(raiz->valor==valor){
+			return raiz;
+		}else{
+			if(raiz->valor>valor){
+				return raiz->dir;
+			}else{
+				
+				return raiz->esq;
+			}
+			
+		}
+		
+	}
+	
+	
+	
+}
