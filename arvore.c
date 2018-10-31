@@ -179,6 +179,27 @@ struct nodo * busca(struct nodo * raiz, int valor){
 		
 	}
 	
+}
+
+/* Altura de uma árvore
+ * @param raiz raiz da árvore
+ * @return altura da árvore
+ */
+int altura(struct nodo * raiz){
+	int alt_esq,alt_dir;//guardar os valores das arvores esquerda e direita
+	if(/*(raiz->dir==NULL && raiz->esq==NULL) ||*/ raiz==NULL){
+		return 0;
+	}else{
+		if(raiz->dir==NULL && raiz->esq==NULL){
+			return 1;
+		}else{
+			alt_esq=altura(raiz->esq);
+			alt_dir=altura(raiz->dir);
+			return alt_esq-alt_dir;
+		}
+		
+		
+	}
 	
 	
 }
