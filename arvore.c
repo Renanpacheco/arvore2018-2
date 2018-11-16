@@ -168,7 +168,7 @@ struct nodo * busca(struct nodo * raiz, int valor){
 		if(raiz->valor==valor){
 			return raiz;
 		}else{
-			if(raiz->valor>valor){
+			if(valor>raiz->valor){
 				return raiz->dir;
 			}else{
 				
@@ -193,8 +193,8 @@ int altura(struct nodo * raiz){
 		if(raiz->dir==NULL && raiz->esq==NULL){
 			return 1;
 		}else{
-			alt_esq=altura(raiz->esq);
-			alt_dir=altura(raiz->dir);
+			alt_esq=altura(raiz->esq)+1;
+			alt_dir=altura(raiz->dir)+1;
 			return alt_esq-alt_dir;
 		}
 		
@@ -202,4 +202,33 @@ int altura(struct nodo * raiz){
 	}
 	
 	
+}
+
+
+/* Remove todos os nodos
+ * @param raiz da árvore
+ */
+void remove_todos(struct nodo * raiz){
+	
+	if( (raiz->dir==NULL) && (raiz->esq==NULL)){
+		free(raiz); 
+	}else{
+		remove_todos(raiz->dir);
+		remove_todos(raiz->esq);
+	}
+	
+}
+
+
+/* Número de elementos em uma árvore 
+ * @param raiz raiz da árvore
+ * @return número de elementos da árvore 
+ */
+int numero_elementos(struct nodo * raiz){
+	if(raiz==NULL){
+		return 0;
+	}else{
+		return numero_elementos(raiz->dir)+ numero_elementos(raiz->esq)+1;
+		
+	}
 }
