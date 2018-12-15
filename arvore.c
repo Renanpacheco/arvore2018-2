@@ -10,9 +10,14 @@
 struct nodo * insere_nodo(struct nodo * raiz, int valor){
 
     if (raiz->valor==valor){
-        return NULL;
+        printf("cheguei valor igual");
+        return raiz;
     }else if(raiz==NULL){
+        printf("sem malloc");
         raiz= malloc(sizeof(struct nodo));
+        printf("fiz malloc");
+        raiz->valor=valor;
+        
         raiz->dir=NULL;
         raiz->esq=NULL;
         //*raiz->esq=NULL;
@@ -28,31 +33,39 @@ struct nodo * insere_nodo(struct nodo * raiz, int valor){
     }
 }
 
+struct nodo * criar_arvore(struct nodo *raiz, int valor){
+    raiz=malloc(sizeof(struct nodo));
+    raiz->valor=valor;
+    raiz->dir=NULL;
+    raiz->esq=NULL;
+    raiz->balanceamento=0;
+    return raiz;
+}
 /* Inicializa uma árvore
  * @param entradas número de valores iniciais
  * @param valores vetor com valores a serem inseridos
  * @return raiz da árvore ou NULL se erro
  */ 
 struct nodo * inicializa_arvore(int entradas, int * valores){
-    int i;
+    int i=0;
     struct nodo *raiz=NULL;
     //struct nodo *raiz_temp=raiz;
-    struct nodo *manter_raiz=raiz;
-    int aux;
+    struct nodo *manter_raiz=NULL;
+    int aux;    
 
     if((entradas<=0)|| (valores==NULL)){
         return NULL;
     }else{
-        for(i=0;i<entradas;i++){
-            aux=*valores;
-            raiz=insere_nodo(raiz , aux);
-            valores++;
-        }
-        //raiz_temp=raiz;
-        raiz=manter_raiz;
-        return raiz;
+        raiz=criar_arvore(raiz,*valores);
         
-    }
+        for(i=1;i<entradas;i++){
+            aux=*valores;
+            raiz=insere_nodo(manter_raiz , aux);
+            valores++;
+            }
+
+        }
+        return raiz;
 }
 /* Remove nodo em uma árvore se existir, dando prioridade à subárvore esquerda para novo nodo raiz
  * @param raiz raiz da árvore
